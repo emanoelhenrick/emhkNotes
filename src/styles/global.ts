@@ -7,8 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body, input, button {
-    font-family: sans-serif;
+  body, input, button, textarea {
+    font-family: 'Raleway', sans-serif;
   }
 
   body {

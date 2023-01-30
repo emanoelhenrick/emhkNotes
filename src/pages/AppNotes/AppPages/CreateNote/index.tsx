@@ -37,6 +37,7 @@ export function CreateNote() {
         <input
           type="text"
           placeholder="Título..."
+          maxLength={45}
           {...register('noteTitle')}
         />
       </NoteName>

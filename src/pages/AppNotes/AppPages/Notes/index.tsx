@@ -1,14 +1,15 @@
-import { Plus } from "phosphor-react";
+import { ArrowBendDownLeft, Plus } from "phosphor-react";
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { NotesContext } from "../../context";
-import { Note } from "./components/Note";
-import { AddNote } from "./components/Note/styles";
-import { FolderName, NotesContainer, NotesList } from "./styles";
+import { AddNote, NoteContainer } from "./components/Note/styles";
+import { FolderName, NoFolder, NotesContainer, NotesList } from "./styles";
 import { useParams } from "react-router-dom";
 
 
 export function Notes() {
+
+  const navigate = useNavigate()
 
   const {notesList, foldersList} = useContext(NotesContext)
 
@@ -18,21 +19,46 @@ export function Notes() {
 
   const currentNotes = notesList.filter((note) => note.folderId === folderId)
 
-  return (
-    <NotesContainer>
-      <FolderName>
-            <h1>{folderName?.folderTitle}</h1>
-          </FolderName>
-          <NotesList>
-            {currentNotes.map(note => {
-              return <Note title={note.noteTitle} key={note.noteId} />
-            })}
-            <NavLink to={`/app/create/${folderId}`} title="Criar nota">
-              <AddNote>
-                <Plus size={24} />
-              </AddNote>
-            </NavLink>
-          </NotesList>
-    </NotesContainer>
-  )
+  function viewNote(noteId: any) {
+    navigate(`/app/note/${noteId}`)
+  }
+
+  function isFolderId() {
+    if(!folderId){
+      return (
+        <NoFolder>
+          <h1>crie uma pasta primeiro</h1>
+          <ArrowBendDownLeft size={40} weight="thin" />
+        </NoFolder>
+      )
+    } else {
+      return (
+      <NotesContainer>
+        <FolderName>
+          <h1>{folderName?.folderTitle}</h1>
+        </FolderName>
+        <NotesList>
+          {currentNotes.map(note => {
+            return (
+              <NoteContainer
+                key={note.noteId}
+                onClick={() => viewNote(note.noteId)}
+              >
+                {note.noteTitle}
+              </NoteContainer>
+            )
+          })}
+        <NavLink to={`/app/create/${folderId}`} title="Criar nota">
+          <AddNote>
+            <Plus size={24} />
+          </AddNote>
+        </NavLink>
+        </NotesList>
+      </NotesContainer>
+      )
+    }
+    
+  }
+
+  return isFolderId()
 }

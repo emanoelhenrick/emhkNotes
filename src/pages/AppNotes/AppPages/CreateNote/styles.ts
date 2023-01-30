@@ -53,6 +53,7 @@ export const NoteText = styled.textarea`
   font-family: sans-serif;
   border: 2px solid transparent;
   padding: 1rem;
+  font-family: 'Raleway', sans-serif;
 
   transition: all 200ms;
 

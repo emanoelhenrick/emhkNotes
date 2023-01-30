@@ -36,3 +36,15 @@ export const NotesList = styled.div`
   gap: 1rem;
 `
 
+export const NoFolder = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h1{
+    font-weight: 400;
+  }
+`
