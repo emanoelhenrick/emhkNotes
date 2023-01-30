@@ -35,3 +35,4 @@ export const NotesList = styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
 `
+

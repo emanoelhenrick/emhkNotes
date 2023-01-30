@@ -30,3 +30,10 @@ export const ButtonConfig = styled.button`
   font-size: 1rem;
 `
 
+export const NoFolder = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: red;
+`
+
