@@ -44,6 +44,7 @@ export const FolderContainer = styled.button`
 
   &:hover {
     transform: scale(1.05, 1.05);
+    background-color: silver;
   }
 `
 

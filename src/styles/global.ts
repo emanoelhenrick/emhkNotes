@@ -12,7 +12,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: #fff;
+    background: silver;
     height: 100vh;
+    width: 100%;
   }
 `

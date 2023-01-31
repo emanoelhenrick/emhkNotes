@@ -1,5 +1,5 @@
 import { ButtonAddFolder, FolderContainer, FoldersContainer } from "./styles";
-import { Plus } from 'phosphor-react'
+import { Plus, Trash } from 'phosphor-react'
 import { useContext, useState } from "react";
 import { NotesContext } from "../../context";
 import { useForm } from "react-hook-form";
@@ -75,7 +75,9 @@ export function Folders() {
             <FolderContainer
             key={folder.folderId}
             >
-            <span>{folder.folderTitle}</span>
+            <span>
+              {folder.folderTitle}
+            </span>
             </FolderContainer>
           </NavLink>
           

@@ -2,9 +2,16 @@ import { Folders } from "./components/Folders";
 import { Profile } from "./components/Profile";
 import { AppContainer, ButtonConfig } from "./styles";
 import { NotesContextProvider } from "./context";
+import { useNavigate } from "react-router-dom";
 
 
 export function AppNotes({ children }: any) {
+
+  const navigate = useNavigate()
+
+  function goToHome() {
+    navigate('/app')
+  }
 
   return (
     <AppContainer>
@@ -14,11 +21,10 @@ export function AppNotes({ children }: any) {
           <Profile />
           <Folders />
         </div>
-        <ButtonConfig>Config</ButtonConfig>
+        <ButtonConfig onClick={goToHome}>Config</ButtonConfig>
       </aside>
       {children}
       </NotesContextProvider>
     </AppContainer>
-    
   )
 }

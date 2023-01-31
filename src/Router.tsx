@@ -1,9 +1,11 @@
+import { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AppLayout } from './layouts/App'
 import { AuthLayout } from './layouts/Auth'
 import { CreateNote } from './pages/AppNotes/AppPages/CreateNote'
 import { Notes } from './pages/AppNotes/AppPages/Notes'
 import { NoteView } from './pages/AppNotes/AppPages/NoteView'
+import { NotesContext } from './pages/AppNotes/context'
 import { LoginPage } from './pages/Login'
 import { RegisterPage } from './pages/Register'
 
@@ -15,6 +17,7 @@ export function Router() {
         <Route path='/' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
       </Route>
+
       <Route path='/app' element={<AppLayout />}>
         <Route path="/app" element={<Notes />}/>
         <Route path=":folderId" element={<Notes />}/>

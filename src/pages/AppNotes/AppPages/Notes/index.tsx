@@ -1,9 +1,9 @@
-import { ArrowBendDownLeft, Plus } from "phosphor-react";
-import { useContext } from "react";
+import { ArrowArcLeft, ArrowBendDownLeft, CaretLeft, Plus, Trash } from "phosphor-react";
+import { useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { NotesContext } from "../../context";
 import { AddNote, NoteContainer } from "./components/Note/styles";
-import { FolderName, NoFolder, NotesContainer, NotesList } from "./styles";
+import { DivContainer, FolderName, NoFolder, NotesContainer, NotesList } from "./styles";
 import { useParams } from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ export function Notes() {
 
   const navigate = useNavigate()
 
-  const {notesList, foldersList} = useContext(NotesContext)
+  const {notesList, foldersList, deleteFolder, deleteNote} = useContext(NotesContext)
 
   const { folderId } = useParams()
 
@@ -19,11 +19,41 @@ export function Notes() {
 
   const currentNotes = notesList.filter((note) => note.folderId === folderId)
 
+  useEffect(() => {
+
+    if(folderId){
+      const isFolderInclude = foldersList.find((folder) => {
+        return folder.folderId === folderId
+      })
+
+      if(!isFolderInclude){
+        navigate('/app')
+      }
+    }
+
+    if(!folderId && foldersList.length > 0){
+      return navigate(`/app/${foldersList[0].folderId}`)
+    }
+
+  }, [folderId, foldersList])
+  
+
   function viewNote(noteId: any) {
     navigate(`/app/note/${noteId}`)
   }
 
+  function handleDeleteFolder() {
+    deleteFolder(folderId)
+    navigate('/app')
+  }
+
+  function handleDeleteNote(noteId: string) {
+    deleteNote(noteId);
+    
+  }
+
   function isFolderId() {
+
     if(!folderId){
       return (
         <NoFolder>
@@ -36,16 +66,24 @@ export function Notes() {
       <NotesContainer>
         <FolderName>
           <h1>{folderName?.folderTitle}</h1>
+          <button onClick={handleDeleteFolder}>
+            <Trash size={24} />
+          </button>
         </FolderName>
         <NotesList>
           {currentNotes.map(note => {
             return (
-              <NoteContainer
-                key={note.noteId}
-                onClick={() => viewNote(note.noteId)}
-              >
-                {note.noteTitle}
-              </NoteContainer>
+              <DivContainer key={note.noteId}>
+                <NoteContainer
+                  onClick={() => viewNote(note.noteId)}
+                >
+                  {note.noteTitle}
+                </NoteContainer>
+                <button
+                  onClick={() => handleDeleteNote(note.noteId)}
+                  ><Trash size={14} />
+                </button>
+              </DivContainer>
             )
           })}
         <NavLink to={`/app/create/${folderId}`} title="Criar nota">

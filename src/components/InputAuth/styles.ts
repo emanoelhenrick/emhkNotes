@@ -5,4 +5,6 @@ export const FormDiv = styled.div`
   background-color: white;
   border-radius: 12px;
   padding: 3rem;
+  margin: auto;
+  margin-top: 15rem;
 `

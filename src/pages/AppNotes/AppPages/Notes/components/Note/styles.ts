@@ -16,9 +16,6 @@ export const NoteContainer = styled.button`
   display: flex;
   cursor: pointer;
 
-  &:hover {
-    transform: scale(1.05, 1.05);
-  }
 `
 
 export const AddNote = styled.div`

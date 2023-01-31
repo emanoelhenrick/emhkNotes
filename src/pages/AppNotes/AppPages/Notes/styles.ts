@@ -16,6 +16,36 @@ export const FolderName = styled.div`
   padding: 1rem;
   font-size: 1.5rem;
   display: flex;
+  justify-content: space-between;
+
+  button:last-child {
+    align-self: flex-end;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    width: 24;
+    height: 24px;
+    color: gray;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  button:first-child {
+    position: absolute;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    width: 24;
+    height: 24px;
+
+    &:hover {
+      color: red;
+    }
+  }
 
   h1 {
     
@@ -34,6 +64,38 @@ export const NotesList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
+  
+`
+
+export const DivContainer = styled.div`
+  position: relative;
+  transition: transform 100ms;
+
+  &:hover {
+    transform: scale(1.05,1.05);
+
+    button:last-child {
+      opacity: 1;
+    }
+  
+  }
+
+  button:last-child {
+    opacity: 0;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    border: none;
+    background: none;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 100ms;
+    color: gray;
+
+    &:hover {
+      color: red;
+    }
+  }
 `
 
 export const NoFolder = styled.div`

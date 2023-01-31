@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 
 interface NotesContextProps {
@@ -6,6 +6,8 @@ interface NotesContextProps {
   foldersList: FolderProps[]
   addNewNote: (note: NoteProps) => void
   addNewFolder: (folder: FolderProps) => void
+  deleteFolder: (folderId: string | undefined) => void
+  deleteNote: (noteId: string | undefined) => void
 }
 
 interface NoteProps {
@@ -39,8 +41,33 @@ function generateID() {
 export const NotesContext = createContext({} as NotesContextProps)
 
 export function NotesContextProvider({ children }: any) {
-  const [notesList, setNotesList] = useState<NoteProps[]>([])
-  const [foldersList, setFoldersList] = useState<FolderProps[]>([])
+
+  const contentStored = localStorage.getItem('@emhk-notes:notes-and-folders')
+
+  const [notesList, setNotesList] = useState<NoteProps[]>(() => {
+    if(contentStored){
+      const Stored = JSON.parse(contentStored)
+      return Stored.notesList
+    } else {
+      return []
+    }
+  })
+  const [foldersList, setFoldersList] = useState<FolderProps[]>(() => {
+    if(contentStored){
+      const Stored = JSON.parse(contentStored)
+      return Stored.foldersList
+    } else {
+      return []
+    }
+  })
+
+  useEffect(() => {
+    const notesAndFolders = {
+      notesList,
+      foldersList
+    }
+    localStorage.setItem('@emhk-notes:notes-and-folders', JSON.stringify(notesAndFolders))
+  }, [notesList, foldersList])
 
   function addNewNote(props: newNoteProps) {
     
@@ -61,7 +88,28 @@ export function NotesContextProvider({ children }: any) {
     setFoldersList(prevFolders => {
       return [...prevFolders, newFolder]
     })
+  }
 
+  function deleteFolder(folderId: string | undefined) {
+    const newFolders = foldersList.filter((folder) => {
+      return folder.folderId !== folderId
+    })
+
+    const newNotes = notesList.filter((note) => {
+      return note.folderId !== folderId
+    })
+
+    setNotesList(newNotes)
+    setFoldersList(newFolders)
+  }
+
+  function deleteNote(noteId: string | undefined) {
+
+    const newNotes = notesList.filter((note) => {
+      return note.noteId !== noteId
+    })
+
+    setNotesList(newNotes)
   }
   
 
@@ -71,7 +119,9 @@ export function NotesContextProvider({ children }: any) {
       notesList,
       foldersList,
       addNewNote,
-      addNewFolder
+      addNewFolder,
+      deleteFolder,
+      deleteNote
     }}
     >
       {children}
