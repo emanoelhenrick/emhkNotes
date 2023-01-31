@@ -18,7 +18,14 @@ export const FolderName = styled.div`
   display: flex;
   justify-content: space-between;
 
+  &:hover {
+    button:last-child {
+      opacity: 1;
+    }
+  }
+
   button:last-child {
+    opacity: 0;
     align-self: flex-end;
     cursor: pointer;
     outline: none;
@@ -27,6 +34,7 @@ export const FolderName = styled.div`
     width: 24;
     height: 24px;
     color: gray;
+    transition: all 100ms;
 
     &:hover {
       color: red;

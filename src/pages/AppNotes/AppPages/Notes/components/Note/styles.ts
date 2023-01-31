@@ -20,7 +20,6 @@ export const NoteContainer = styled.button`
 
 export const AddNote = styled.div`
   height: 100px;
-  
   padding: 1rem;
   display: flex;
   justify-content: center;

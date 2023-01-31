@@ -88,7 +88,7 @@ export function Notes() {
           })}
         <NavLink to={`/app/create/${folderId}`} title="Criar nota">
           <AddNote>
-            <Plus size={24} />
+            <Plus size={24} color="black" />
           </AddNote>
         </NavLink>
         </NotesList>
