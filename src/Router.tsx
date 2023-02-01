@@ -23,6 +23,7 @@ export function Router() {
         <Route path=":folderId" element={<Notes />}/>
         <Route path='/app/create/:folderId' element={<CreateNote />} />
         <Route path='/app/note/:noteId' element={<NoteView />} />
+        <Route path='/app/edit/:noteId' element={<CreateNote />} />
         {/* <Route path='/app/config' element={<ConfigPage />} /> */}
       </Route>
     </Routes>
