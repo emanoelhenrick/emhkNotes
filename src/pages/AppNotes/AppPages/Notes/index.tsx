@@ -2,8 +2,8 @@ import { ArrowArcLeft, ArrowBendDownLeft, CaretLeft, Plus, Trash } from "phospho
 import { useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { NotesContext } from "../../context";
-import { AddNote, NoteContainer } from "./components/Note/styles";
-import { DivContainer, FolderName, NoFolder, NotesContainer, NotesList } from "./styles";
+import { NoteContainer } from "./components/Note/styles";
+import { AddNote, DivContainer, FolderName, NoFolder, NotesContainer, NotesList } from "./styles";
 import { useParams } from "react-router-dom";
 
 
@@ -89,6 +89,7 @@ export function Notes() {
         <NavLink to={`/app/create/${folderId}`} title="Criar nota">
           <AddNote>
             <Plus size={24} color="black" />
+            <span>new note</span>
           </AddNote>
         </NavLink>
         </NotesList>

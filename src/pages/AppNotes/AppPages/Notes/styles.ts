@@ -72,6 +72,10 @@ export const NotesList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
+
+  a{
+    text-decoration: none;
+  }
   
 `
 
@@ -102,6 +106,36 @@ export const DivContainer = styled.div`
 
     &:hover {
       color: red;
+    }
+  }
+`
+export const AddNote = styled.div`
+  height: 100px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 200ms;
+  position: relative;
+
+  span {
+    opacity: 0;
+    position: absolute;
+    font-size: 0.8rem;
+    bottom: 12px;
+    transition: all 200ms;
+    color: gray;
+
+  }
+
+  &:hover {
+    background: #E1e1e2;
+    transform: scale(1.05, 1.05);
+
+    span {
+      opacity: 1;
     }
   }
 `
