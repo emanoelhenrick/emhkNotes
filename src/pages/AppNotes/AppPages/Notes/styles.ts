@@ -7,6 +7,18 @@ export const NotesContainer = styled.div`
   grid-template-rows: 10rem 1fr;
 `
 
+export const EditTitle = styled.input`
+  font-size: 3rem;
+  font-weight: bold;
+  height: 4rem;
+  position: absolute;
+  background: none;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid black;
+  bottom: 0.7rem;
+`
+
 export const FolderName = styled.div`
   height: 10rem;
   background-color: #E1e1e2;
@@ -17,6 +29,7 @@ export const FolderName = styled.div`
   font-size: 1.5rem;
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   &:hover {
     button:last-child {
@@ -124,7 +137,7 @@ export const AddNote = styled.div`
     opacity: 0;
     position: absolute;
     font-size: 0.8rem;
-    bottom: 12px;
+    top: 12px;
     transition: all 200ms;
     color: gray;
 

@@ -1,23 +1,37 @@
 import { ArrowArcLeft, ArrowBendDownLeft, CaretLeft, Plus, Trash } from "phosphor-react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { NotesContext } from "../../context";
 import { NoteContainer } from "./components/Note/styles";
-import { AddNote, DivContainer, FolderName, NoFolder, NotesContainer, NotesList } from "./styles";
+import { AddNote, DivContainer, EditTitle, FolderName, NoFolder, NotesContainer, NotesList } from "./styles";
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
+interface EditedTitle {
+  editedTitle: string
+}
+
+interface FolderProps {
+  folderTitle: string
+  folderId: string
+}
 
 
 export function Notes() {
 
   const navigate = useNavigate()
 
-  const {notesList, foldersList, deleteFolder, deleteNote} = useContext(NotesContext)
+  const {notesList, foldersList, deleteFolder, deleteNote, editFolder} = useContext(NotesContext)
 
   const { folderId } = useParams()
+
+  const { register, handleSubmit, reset } = useForm()
 
   const folderName = foldersList.find((folder) => folder.folderId === folderId)
 
   const currentNotes = notesList.filter((note) => note.folderId === folderId)
+
+  const [isEditingTitle, setIsEditingTitle] = useState(false)
 
   useEffect(() => {
 
@@ -36,6 +50,50 @@ export function Notes() {
     }
 
   }, [folderId, foldersList])
+
+  function handleEditFolder(data: EditedTitle) {
+    
+    const dataValid = data.editedTitle === '' || data.editedTitle.startsWith(' ')
+
+    const newFolderEdited = {
+      folderTitle: dataValid ? folderName?.folderTitle : data.editedTitle,
+      folderId
+    }
+
+    editFolder(newFolderEdited as FolderProps)
+    reset()
+    setIsEditingTitle(false)
+  }
+
+  function editingTitle() {
+    if(!isEditingTitle){
+      return (
+        <>
+          <h1 onDoubleClick={() => setIsEditingTitle(true)}>
+            {folderName?.folderTitle}
+          </h1>
+
+          <button onClick={handleDeleteFolder}>
+            <Trash size={24} />
+          </button>
+        </>
+      )
+    } else {
+      return (
+        <form onSubmit={handleSubmit(handleEditFolder as any)}>
+          <EditTitle
+            placeholder="Novo título..."
+            autoFocus
+            {...register('editedTitle')}
+            onBlur={handleSubmit(handleEditFolder as any)}
+            required
+            >
+            
+          </EditTitle>
+        </form>
+      )
+    }
+  }
   
 
   function viewNote(noteId: any) {
@@ -65,10 +123,7 @@ export function Notes() {
       return (
       <NotesContainer>
         <FolderName>
-          <h1>{folderName?.folderTitle}</h1>
-          <button onClick={handleDeleteFolder}>
-            <Trash size={24} />
-          </button>
+          {editingTitle()}
         </FolderName>
         <NotesList>
           {currentNotes.map(note => {

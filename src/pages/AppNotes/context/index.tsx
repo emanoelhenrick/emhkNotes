@@ -9,6 +9,7 @@ interface NotesContextProps {
   deleteFolder: (folderId: string | undefined) => void
   deleteNote: (noteId: string | undefined) => void
   editNote: (data: NoteProps) => void
+  editFolder: (data: FolderProps) => void
 }
 
 interface NoteProps {
@@ -105,6 +106,19 @@ export function NotesContextProvider({ children }: any) {
     })
   }
 
+  function editFolder(data: FolderProps){
+    const newFoldersList = foldersList.map((folder) => {
+      if(folder.folderId === data.folderId){
+        folder.folderTitle = data.folderTitle
+        return folder
+      } else {
+        return folder
+      }
+    })
+
+    setFoldersList(newFoldersList)
+  }
+
   function deleteFolder(folderId: string | undefined) {
     const newFolders = foldersList.filter((folder) => {
       return folder.folderId !== folderId
@@ -137,7 +151,8 @@ export function NotesContextProvider({ children }: any) {
       addNewFolder,
       deleteFolder,
       deleteNote,
-      editNote
+      editNote,
+      editFolder
     }}
     >
       {children}
