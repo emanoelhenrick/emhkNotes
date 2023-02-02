@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const NoteContainer = styled.button`
+interface PropsNoteContainer extends React.HTMLProps<HTMLButtonElement> {
+  theme: any
+  isDeleted: boolean
+}
+
+export const NoteContainer = styled.button<PropsNoteContainer>`
   width: 150px;
   word-wrap: break-word;
   overflow: hidden;
@@ -16,12 +21,13 @@ export const NoteContainer = styled.button`
   display: flex;
   cursor: pointer;
   animation: fade-in-note 300ms;
-  animation: ${props => props.isDeleted && 'fade-out-note 200ms'};
+  animation: ${props => props.isDeleted && 'fade-out-note 300ms'};
+  animation-fill-mode: forwards;
 
   @keyframes fade-in-note {
     0% {
       opacity: 0.5;
-      transform: scale(0.8,0.8);
+      transform: scale(0.95,0.95);
     }
     100% {
       opacity: 1;
@@ -29,15 +35,11 @@ export const NoteContainer = styled.button`
   }
 
   @keyframes fade-out-note {
-    0% {
-      
-    }
     100% {
-      width: 0px;
+      width: 0%;
       padding: 1rem 0;
       opacity: 0;
-      /* overflow: hidden; */
+      display: none;
     }
   }
-
 `

@@ -109,7 +109,7 @@ export function Notes() {
 
   function handleDeleteNote(noteId: string) {
     isDeleted(noteId)
-    setTimeout(() => deleteNote(noteId), 180)
+    setTimeout(() => deleteNote(noteId), 300)
   }
 
   function isDeleted(noteId: string){
@@ -164,8 +164,6 @@ export function Notes() {
       </NotesContainer>
       )
     }
-    
   }
-
   return isFolderId()
 }
