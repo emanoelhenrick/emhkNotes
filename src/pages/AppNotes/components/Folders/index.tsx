@@ -1,9 +1,9 @@
-import { ButtonAddFolder, FolderContainer, FoldersContainer } from "./styles";
+import { ButtonAddFolder, CurrentFolder, FolderContainer, FoldersContainer } from "./styles";
 import { Plus, Trash } from 'phosphor-react'
 import { useContext, useState } from "react";
 import { NotesContext } from "../../context";
 import { useForm } from "react-hook-form";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 function generateID() {
   let array = new Uint32Array(4);
@@ -20,6 +20,8 @@ export function Folders() {
   const { foldersList, addNewFolder } = useContext(NotesContext)
   const { register, handleSubmit, reset } = useForm()
   const [ progressNewFolder, setProgressNewFolder ] = useState(false)
+
+  const { folderId } = useParams()
 
   interface folderPropForm {
     folderTitle: string
@@ -48,6 +50,7 @@ export function Folders() {
       return (
         <input
           type="text"
+          autoFocus
           placeholder="Titulo"
           {...register('folderTitle')}
         />
@@ -72,12 +75,12 @@ export function Folders() {
             to={`/app/${folder.folderId}`}
             key={folder.folderId}
             >
-            <FolderContainer
-            key={folder.folderId}
-            >
+
+            <FolderContainer>
             <span>
               {folder.folderTitle}
             </span>
+            { folderId === folder.folderId && <CurrentFolder /> }
             </FolderContainer>
           </NavLink>
           

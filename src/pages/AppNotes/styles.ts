@@ -2,7 +2,7 @@ import styled from "styled-components";
 export const AppContainer = styled.div`
   width: 1000px;
   height: 700px;
-  background-color: #F3F4F5;
+  background-color: ${props => props.theme.white};
   border-radius: 20px;
   margin: 100px auto;
   padding: 20px;
@@ -25,9 +25,15 @@ export const ButtonConfig = styled.button`
   border: none;
   outline: none;
   width: 100%;
-  background-color: #E1e1e2;
+  background-color: ${props => props.theme.white};
   text-align: left;
   font-size: 1rem;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:hover {
+    background-color: ${props => props.theme["gray-100"]};
+  }
 `
 
 

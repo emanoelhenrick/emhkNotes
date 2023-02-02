@@ -21,10 +21,10 @@ export const EditTitle = styled.input`
 
 export const FolderName = styled.div`
   height: 10rem;
-  background-color: #E1e1e2;
+  background-color: ${props => props.theme.white};
   border-radius: 10px;
   margin-bottom: 1rem;
-  color: black;
+  color: ${props => props.theme["gray-800"]};
   padding: 1rem;
   font-size: 1.5rem;
   display: flex;
@@ -50,7 +50,7 @@ export const FolderName = styled.div`
     transition: all 100ms;
 
     &:hover {
-      color: red;
+      color: ${props => props.theme["red-500"]};
     }
   }
 
@@ -139,12 +139,12 @@ export const AddNote = styled.div`
     font-size: 0.8rem;
     top: 12px;
     transition: all 200ms;
-    color: gray;
+    color: ${props => props.theme["gray-700"]};
 
   }
 
   &:hover {
-    background: #E1e1e2;
+    background: ${props => props.theme["gray-100"]};
     transform: scale(1.05, 1.05);
 
     span {

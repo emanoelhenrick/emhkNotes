@@ -21,7 +21,7 @@ export const NotesContainer = styled.div`
 export const NoteName = styled.div`
   height: 10rem;
   width: 100%;
-  background-color: #E1e1e2;
+  background-color: ${props => props.theme.white};
   border-radius: 10px;
   margin-bottom: 1rem;
   color: black;
@@ -48,6 +48,7 @@ export const NoteText = styled.textarea`
   width: 100%;
   height: 200px;
   border-radius: 10px;
+  background: ${props => props.theme["gray-100"]};
   outline: none;
   font-size: 1rem;
   font-family: sans-serif;
@@ -68,13 +69,13 @@ export const ButtonSaveNote = styled.button`
   margin-top: 1rem;
   border: none;
   outline: none;
-  background-color: #E1e1e2;
+  background-color: ${props => props.theme.white};
   text-align: left;
   font-size: 1rem;
   cursor: pointer;
   transition: all 200ms;
 
   &:hover {
-    background: silver;
+    background: ${props => props.theme["gray-300"]};
   }
 `

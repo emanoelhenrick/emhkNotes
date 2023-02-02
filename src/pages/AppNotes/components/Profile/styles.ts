@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
-  /* padding: 1rem; */
-  background-color: #E1e1e2;
+  background-color: ${props => props.theme["gray-300"]};
   width: 100%;
   height: 10rem;
   border-radius: 10px;
+  background-image: url(https://images.unsplash.com/photo-1517174637803-6929e01b6e63?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: black;
   margin-bottom: 1rem;
   display: flex;
@@ -15,6 +17,7 @@ export const ProfileContainer = styled.div`
 
   span {
     margin-left: 1rem;
+    color: ${props => props.theme.white};
     font-weight: bold;
     display: inline-block;
     align-self: flex-end;
@@ -24,7 +27,7 @@ export const ProfileContainer = styled.div`
 
   div {
     width: 100%;
-    background-color: silver;
+    background-color: ${props => props.theme["gray-900"]};
     height: 3rem;
     position: absolute;
     bottom: 0;

@@ -5,9 +5,15 @@ export const FoldersContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  height: 25rem;
+  padding: 0.5rem;
+
+  overflow-y: scroll;
+  overflow-x: auto;
 
   a {
     width: 100%;
+    text-decoration: none;
   }
 
   form {
@@ -20,11 +26,19 @@ export const FoldersContainer = styled.div`
   border: none;
   outline: none;
   width: 100%;
-  background-color: #E1e1e2;
+  background-color: ${props => props.theme["gray-100"]};
   text-align: left;
   font-size: 1rem;
   transition: all 100ms;
   cursor: auto;
+  animation: fade-in-folder 0.2s;
+
+  @keyframes fade-in-folder {
+    0% {
+      padding: 0px 1rem;
+      font-size: 0px;
+    }
+  }
 
   }
 `
@@ -36,16 +50,27 @@ export const FolderContainer = styled.button`
   border: none;
   outline: none;
   width: 100%;
-  background-color: #E1e1e2;
+  background-color: ${props => props.theme.white};
   text-align: left;
   font-size: 1rem;
   transition: all 100ms;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &:hover {
     transform: scale(1.05, 1.05);
-    background-color: silver;
+    background-color: ${props => props.theme["gray-100"]};
   }
+`
+
+export const CurrentFolder = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: ${props => props.theme["gray-700"]};
+  border-radius: 99px;
+  float: right;
 `
 
 
@@ -65,6 +90,6 @@ export const ButtonAddFolder = styled.button`
   transition: all 100ms;
 
   &:hover {
-    color: red;
+    color: ${props => props.theme["purple-500"]};
   }
 `

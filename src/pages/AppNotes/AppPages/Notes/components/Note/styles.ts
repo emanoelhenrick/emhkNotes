@@ -6,7 +6,7 @@ export const NoteContainer = styled.button`
   overflow: hidden;
   text-align: left;
   height: 100px;
-  background: #E1e1e2;
+  background-color: ${props => props.theme["gray-100"]};
   padding: 1rem;
   border-radius: 10px;
   transition: all 200ms;
@@ -15,5 +15,16 @@ export const NoteContainer = styled.button`
   font-size: 1rem;
   display: flex;
   cursor: pointer;
+  animation: fade-in-note 300ms;
+
+  @keyframes fade-in-note {
+    0% {
+      opacity: 0.5;
+      transform: scale(0.8,0.8);
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
 `
