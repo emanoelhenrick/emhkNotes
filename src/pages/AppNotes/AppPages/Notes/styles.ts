@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LoginPage } from "../../../Login";
 
 export const NotesContainer = styled.div`
   border-radius: 10px;
@@ -85,6 +86,7 @@ export const NotesList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
+  
 
   a{
     text-decoration: none;
@@ -95,6 +97,8 @@ export const NotesList = styled.div`
 export const DivContainer = styled.div`
   position: relative;
   transition: transform 100ms;
+  animation: ${props => props.isDeleted && 'fade-out-note 200ms'};
+  display: block;
 
   &:hover {
     transform: scale(1.05,1.05);
@@ -119,6 +123,13 @@ export const DivContainer = styled.div`
 
     &:hover {
       color: red;
+    }
+  }
+
+  @keyframes fade-out-note {
+    100% {
+      transform: scale(0.1,0.1);
+      opacity: 0;
     }
   }
 `

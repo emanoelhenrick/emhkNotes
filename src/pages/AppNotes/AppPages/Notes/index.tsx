@@ -33,6 +33,8 @@ export function Notes() {
 
   const [isEditingTitle, setIsEditingTitle] = useState(false)
 
+  const [delAnimation, setDelAnimation] = useState('')
+
   useEffect(() => {
 
     if(folderId){
@@ -106,8 +108,12 @@ export function Notes() {
   }
 
   function handleDeleteNote(noteId: string) {
-    deleteNote(noteId);
-    
+    isDeleted(noteId)
+    setTimeout(() => deleteNote(noteId), 180)
+  }
+
+  function isDeleted(noteId: string){
+    setDelAnimation(noteId)
   }
 
   function isFolderId() {
@@ -128,14 +134,17 @@ export function Notes() {
         <NotesList>
           {currentNotes.map(note => {
             return (
-              <DivContainer key={note.noteId}>
+              <DivContainer key={note.noteId} isDeleted={delAnimation === note.noteId ? true : false}>
                 <NoteContainer
                   onClick={() => viewNote(note.noteId)}
+                  
                 >
                   {note.noteTitle}
                 </NoteContainer>
                 <button
-                  onClick={() => handleDeleteNote(note.noteId)}
+                  onClick={() =>{
+                    handleDeleteNote(note.noteId)
+                  }}
                   ><Trash size={14} />
                 </button>
               </DivContainer>
