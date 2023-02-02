@@ -71,6 +71,13 @@ export const CurrentFolder = styled.div`
   background-color: ${props => props.theme["gray-700"]};
   border-radius: 99px;
   float: right;
+  animation: fade-in-currnote 500ms;
+
+  @keyframes fade-in-currnote {
+    0% {
+      opacity: 0;
+    }
+  }
 `
 
 

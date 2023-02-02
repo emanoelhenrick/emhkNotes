@@ -134,8 +134,12 @@ export function Notes() {
         <NotesList>
           {currentNotes.map(note => {
             return (
-              <DivContainer key={note.noteId} isDeleted={delAnimation === note.noteId ? true : false}>
+              <DivContainer
+                key={note.noteId}
+                
+                >
                 <NoteContainer
+                  isDeleted={delAnimation === note.noteId ? true : false}
                   onClick={() => viewNote(note.noteId)}
                   
                 >

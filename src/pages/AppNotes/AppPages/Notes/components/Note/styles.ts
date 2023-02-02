@@ -16,6 +16,7 @@ export const NoteContainer = styled.button`
   display: flex;
   cursor: pointer;
   animation: fade-in-note 300ms;
+  animation: ${props => props.isDeleted && 'fade-out-note 200ms'};
 
   @keyframes fade-in-note {
     0% {
@@ -24,6 +25,18 @@ export const NoteContainer = styled.button`
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes fade-out-note {
+    0% {
+      
+    }
+    100% {
+      width: 0px;
+      padding: 1rem 0;
+      opacity: 0;
+      /* overflow: hidden; */
     }
   }
 

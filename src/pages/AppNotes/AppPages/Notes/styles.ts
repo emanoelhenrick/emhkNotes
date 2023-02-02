@@ -97,8 +97,6 @@ export const NotesList = styled.div`
 export const DivContainer = styled.div`
   position: relative;
   transition: transform 100ms;
-  animation: ${props => props.isDeleted && 'fade-out-note 200ms'};
-  display: block;
 
   &:hover {
     transform: scale(1.05,1.05);
@@ -126,12 +124,6 @@ export const DivContainer = styled.div`
     }
   }
 
-  @keyframes fade-out-note {
-    100% {
-      transform: scale(0.1,0.1);
-      opacity: 0;
-    }
-  }
 `
 export const AddNote = styled.div`
   height: 100px;
