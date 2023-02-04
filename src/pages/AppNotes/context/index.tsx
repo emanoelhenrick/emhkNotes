@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { api } from "../../../lib/axios";
 
 
 interface NotesContextProps {
@@ -16,7 +17,9 @@ interface NoteProps {
   noteTitle: string
   noteContent: string
   noteId: string
+  id: string
   folderId: string
+  userId: string
 }
 
 interface newNoteProps {
@@ -42,43 +45,44 @@ function generateID() {
 
 export const NotesContext = createContext({} as NotesContextProps)
 
+
 export function NotesContextProvider({ children }: any) {
 
-  const contentStored = localStorage.getItem('@emhk-notes:notes-and-folders')
 
-  const [notesList, setNotesList] = useState<NoteProps[]>(() => {
-    if(contentStored){
-      const Stored = JSON.parse(contentStored)
-      return Stored.notesList
-    } else {
-      return []
-    }
-  })
-  const [foldersList, setFoldersList] = useState<FolderProps[]>(() => {
-    if(contentStored){
-      const Stored = JSON.parse(contentStored)
-      return Stored.foldersList
-    } else {
-      return []
-    }
-  })
+  const [notesList, setNotesList] = useState<NoteProps[]>([])
+  const [foldersList, setFoldersList] = useState<FolderProps[]>([])
+
+  async function fetchUserData(userId: string) {
+    const foldersResponse = await api.get(`/folders?userId=${userId}`)
+    const foldersListFromJS = foldersResponse.data
+
+    const notesResponse = await api.get(`/notes?userId=${userId}`)
+    const notesListFromJS = notesResponse.data
+
+
+    setNotesList(notesListFromJS)
+    setFoldersList(foldersListFromJS)
+  }
+
 
   useEffect(() => {
-    const notesAndFolders = {
-      notesList,
-      foldersList
-    }
-    localStorage.setItem('@emhk-notes:notes-and-folders', JSON.stringify(notesAndFolders))
-  }, [notesList, foldersList])
+    fetchUserData('manel1234')
+  }, [])
 
   function addNewNote(props: newNoteProps) {
+
+    const NEW_ID = generateID()
     
     const newNote = {
       noteContent: props.noteContent,
       noteTitle: props.noteTitle,
-      noteId: generateID(),
+      noteId: NEW_ID,
+      id: NEW_ID,
+      userId: 'manel1234',
       folderId: props.folderId
     }
+
+    api.post('/notes', newNote)
     
     setNotesList(prevNotes => {
       return [...prevNotes, newNote]
@@ -99,10 +103,14 @@ export function NotesContextProvider({ children }: any) {
     setNotesList(newNotes)
   }
 
-  function addNewFolder(newFolder:any) {
+
+  function addNewFolder({folderId, folderTitle}:any) {
+    const folder = {id: folderId, folderId, folderTitle, userId: "manel1234"}
+
+    api.post('/folders', folder)
     
     setFoldersList(prevFolders => {
-      return [...prevFolders, newFolder]
+      return [...prevFolders, folder]
     })
   }
 

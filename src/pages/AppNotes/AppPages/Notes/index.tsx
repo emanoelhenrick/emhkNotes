@@ -37,18 +37,8 @@ export function Notes() {
 
   useEffect(() => {
 
-    if(folderId){
-      const isFolderInclude = foldersList.find((folder) => {
-        return folder.folderId === folderId
-      })
-
-      if(!isFolderInclude){
-        navigate('/app')
-      }
-    }
-
-    if(!folderId && foldersList.length > 0){
-      return navigate(`/app/${foldersList[0].folderId}`)
+    if(!folderName){
+      navigate('/app')
     }
 
   }, [folderId, foldersList])

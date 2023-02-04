@@ -41,8 +41,8 @@ export function Folders() {
     
     addNewFolder(newFolder)
     setProgressNewFolder(false)
-    reset()
     navigate(`/app/${newFolder.folderId}`)
+    reset()
   }
 
   function renderInputFolder() {

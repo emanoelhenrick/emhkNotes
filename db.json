@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "username": "manel",
+      "password": "12345",
+      "userId": "manel1234",
+      "id": "manel1234"
+    }
+  ],
+  "folders": [
+    {
+      "id": "eeede1a5b90e0216f60bebc45b69b22",
+      "folderId": "eeede1a5b90e0216f60bebc45b69b22",
+      "folderTitle": "sample 1",
+      "userId": "manel1234"
+    },
+    {
+      "id": "aaa24e29f1eaeb6acdaa165fc5dc98e9",
+      "folderId": "aaa24e29f1eaeb6acdaa165fc5dc98e9",
+      "folderTitle": "sample 2",
+      "userId": "manel1234"
+    }
+  ],
+  "notes": [
+    {
+      "noteContent": "okay",
+      "noteTitle": "teste",
+      "noteId": "cf1fee9b77f8049af2e94f26bd33f88c",
+      "id": "cf1fee9b77f8049af2e94f26bd33f88c",
+      "userId": "manel1234",
+      "folderId": "eeede1a5b90e0216f60bebc45b69b22"
+    },
+    {
+      "noteContent": "dsdsd",
+      "noteTitle": "loico",
+      "noteId": "d12bacb15a757f628c362277103462f",
+      "id": "d12bacb15a757f628c362277103462f",
+      "userId": "manel1234",
+      "folderId": "aaa24e29f1eaeb6acdaa165fc5dc98e9"
+    }
+  ]
+}
